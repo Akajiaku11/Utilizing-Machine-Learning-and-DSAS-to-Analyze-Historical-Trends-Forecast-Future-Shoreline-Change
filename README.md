@@ -1,4 +1,5 @@
 Historical-Trends-and-Forecast-Future-Shoreline-Changes-1974-2024 using Satellites with Machine Learning in the Niger Delta
+
 Overview
 
 The Niger Delta, one of the world's largest river deltas, has been experiencing significant shoreline changes over the past several decades due to various environmental and anthropogenic factors. These changes are critical to understand for sustainable coastal management and environmental conservation in this highly dynamic and ecologically sensitive region. In this project, we aim to analyze historical shoreline trends from 1974 to 2024 and forecast future changes using satellite imagery and machine learning techniques.
