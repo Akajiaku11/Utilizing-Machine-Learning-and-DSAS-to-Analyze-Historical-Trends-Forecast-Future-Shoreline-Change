@@ -1,0 +1,76 @@
+import numpy as np
+import pandas as pd
+import rasterio
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
+
+# Step 1: Load and preprocess satellite data
+def load_satellite_data(file_path):
+    with rasterio.open(file_path) as src:
+        data = src.read(1)  # Read the first band
+        transform = src.transform
+    return data, transform
+
+# Example: Load Landsat data for different years
+data_1974, transform_1974 = load_satellite_data('path_to_landsat_1974.tif')
+data_1984, transform_1984 = load_satellite_data('path_to_landsat_1984.tif')
+data_1994, transform_1994 = load_satellite_data('path_to_landsat_1994.tif')
+data_2004, transform_2004 = load_satellite_data('path_to_landsat_2004.tif')
+data_2014, transform_2014 = load_satellite_data('path_to_landsat_2014.tif')
+data_2024, transform_2024 = load_satellite_data('path_to_landsat_2024.tif')
+
+# Step 2: Extract shoreline data (simplified example)
+def extract_shoreline(data):
+    # This is a simplified example; actual shoreline extraction would involve more complex methods
+    shoreline = np.where(data > 0, 1, 0)  # Example thresholding
+    return shoreline
+
+shoreline_1974 = extract_shoreline(data_1974)
+shoreline_1984 = extract_shoreline(data_1984)
+shoreline_1994 = extract_shoreline(data_1994)
+shoreline_2004 = extract_shoreline(data_2004)
+shoreline_2014 = extract_shoreline(data_2014)
+shoreline_2024 = extract_shoreline(data_2024)
+
+# Step 3: Prepare dataset for machine learning
+def prepare_dataset(shorelines, years):
+    X = []
+    y = []
+    for i in range(len(shorelines) - 1):
+        X.append(shorelines[i].flatten())
+        y.append(shorelines[i + 1].flatten())
+    return np.array(X), np.array(y), years[:-1]
+
+shorelines = [shoreline_1974, shoreline_1984, shoreline_1994, shoreline_2004, shoreline_2014, shoreline_2024]
+years = [1974, 1984, 1994, 2004, 2014, 2024]
+X, y, years = prepare_dataset(shorelines, years)
+
+# Step 4: Train a machine learning model
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = RandomForestRegressor(n_estimators=100, random_state=42)
+model.fit(X_train, y_train)
+
+# Step 5: Validate the model
+y_pred = model.predict(X_test)
+mse = mean_squared_error(y_test, y_pred)
+print(f'Mean Squared Error: {mse}')
+
+# Step 6: Forecast future shoreline changes
+future_year = 2024
+future_shoreline = model.predict(shoreline_2024.flatten().reshape(1, -1))
+future_shoreline = future_shoreline.reshape(shoreline_2024.shape)
+
+# Visualize the results
+plt.figure(figsize=(10, 5))
+plt.subplot(1, 2, 1)
+plt.title('Shoreline 2024 (Actual)')
+plt.imshow(shoreline_2024, cmap='gray')
+
+plt.subplot(1, 2, 2)
+plt.title('Shoreline 2024 (Predicted)')
+plt.imshow(future_shoreline, cmap='gray')
+
+plt.show()
