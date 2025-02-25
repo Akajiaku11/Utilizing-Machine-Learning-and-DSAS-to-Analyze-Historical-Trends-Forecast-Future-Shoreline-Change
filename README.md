@@ -112,6 +112,7 @@ How to Run
     bash
 
 git clone git@github.com:eteh1/Historical-Trends-and-Forecast-Future-Shoreline-Changes-1974-2024.git
+Email: desmondeteh@gmail.com 
 
 Navigate to the project directory:
 
@@ -130,7 +131,7 @@ Run the analysis:
 bash
 
     python analysis.py
-    email: desmondeteh@gmail.com
+    
 
 References
 
