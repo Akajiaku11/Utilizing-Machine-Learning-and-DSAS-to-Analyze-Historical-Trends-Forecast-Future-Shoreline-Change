@@ -130,6 +130,7 @@ Run the analysis:
 bash
 
     python analysis.py
+    email: desmondeteh@gmail.com
 
 References
 
