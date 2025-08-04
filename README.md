@@ -111,8 +111,8 @@ How to Run
 
     bash
 
-git clone git@github.com:eteh1/Historical-Trends-and-Forecast-Future-Shoreline-Changes-1974-2024.git
-Email: desmondeteh@gmail.com 
+git clone git@github.com:Akajiaku11/Historical-Trends-and-Forecast-Future-Shoreline-Changes-1974-2024.git
+Email: akajiakuflowz@gmail.com 
 
 Navigate to the project directory:
 
@@ -133,9 +133,4 @@ bash
     python analysis.py
     
 
-References
 
-    Landsat Missions
-    Sentinel Hub
-    Google Earth Engine
-    Smith, R. et al. (2018). "Shoreline Change Detection Using Remote Sensing and Machine Learning Techniques."
